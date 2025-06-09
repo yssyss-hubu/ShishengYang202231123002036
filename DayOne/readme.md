@@ -85,7 +85,7 @@ conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvi
 ```
 
 ---
----
+
 
 ##  五、遥感影像处理 - 多波段 TIFF 转 RGB 图像
 
@@ -114,9 +114,11 @@ def scale_to_255(arr, max_val=10000):
 def save_image_from_bands(red, green, blue, output_path, normalize=True, max_val=10000):
     # 根据 normalize 选择归一化或线性缩放处理
     # 最终保存 RGB 图片到指定路径
+    
+---
 
 
-## ✅ 今日总结
+## 六、 今日总结
 
 | 模块        | 状态 | 说明            |
 | --------- | -- | ------------- |
