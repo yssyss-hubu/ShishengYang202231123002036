@@ -86,7 +86,7 @@ def main():
         train_loss, train_acc = train_one_epoch(model, train_loader, criterion, optimizer, device)
         val_loss, val_acc = validate(model, val_loader, criterion, device)
 
-        # 保存表现最好的模型
+        # 保存最好的模型
         if val_acc > best_val_acc:
             best_val_acc = val_acc
             torch.save(model.state_dict(), "../best_alexnet.pth")

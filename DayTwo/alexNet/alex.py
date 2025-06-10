@@ -29,7 +29,6 @@ class AlexNet(nn.Module):
             nn.MaxPool2d(kernel_size=3, stride=2),
         )
 
-        # 计算特征图尺寸
         # 输入224x224 -> conv1(11x11, s=4, p=2): (224+2*2-11)/4+1=55
         # maxpool1(3x3, s=2): floor((55-3)/2+1)=27
         # conv2(5x5, p=2): 27

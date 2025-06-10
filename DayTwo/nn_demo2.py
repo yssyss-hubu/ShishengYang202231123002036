@@ -35,7 +35,7 @@ for data in dataloader:
     imgs, targets = data
     output = chen(imgs)
 
-    # print(imgs.shape)  # torch.Size([64, 3, 32, 32])
+    # print(imgs.shape)  # torch.Size([64, 3, 32, 32]
     # print(output.shape)  # torch.Size([64, 6, 30, 30])
     writer.add_images("input", imgs, step)
 

@@ -25,6 +25,6 @@ print(output)
 output2 = F.conv2d(input=input,weight=kernel,stride=2)
 print(output2)
 
-# padding 在周围扩展一个像素，默认为0；
+# padding 在周围扩展一个像素，默认为0
 output3 = F.conv2d(input=input,weight=kernel,stride=1,padding=1)
 print(output3)

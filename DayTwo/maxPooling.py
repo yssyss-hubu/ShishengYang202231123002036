@@ -19,7 +19,7 @@ dataloader = DataLoader(dataset=dataset,
 #                       [5,2,3,1,1],
 #                       [2,1,0,1,1]], dtype = torch.float)
 # input =torch.reshape(input,(-1,1,5,5))
-# print(input.shape)
+# print(input.shape
 
 
 class Chen(nn.Module):
