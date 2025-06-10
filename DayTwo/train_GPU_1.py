@@ -9,12 +9,6 @@ from torch.utils.tensorboard import SummaryWriter
 
 # from model import *
 
-# 定义训练的设备
-device = torch.device("cuda:0")
-# device = torch.device("cuda")# 单显卡写法没问题
-# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")# 常用写法
-
-
 # 准备数据集
 train_data = torchvision.datasets.CIFAR10(root="../dataset_chen",
                                          train=True,
@@ -57,11 +51,13 @@ class Chen(nn.Module):
         return x
 
 chen = Chen()
-chen = chen.to(device)
+if torch.cuda.is_available():
+    chen = chen.cuda()
 
 # 创建损失函数
 loss_fn = nn.CrossEntropyLoss()
-loss_fn = loss_fn.to(device)
+if torch.cuda.is_available():
+    loss_fn = loss_fn.cuda()
 
 # 优化器
 # learning_rate = 1e-2 相当于(10)^(-2)
@@ -84,8 +80,9 @@ for i in range(epoch):
     # 训练步骤
     for data in train_loader:
         imgs, targets = data
-        imgs = imgs.to(device)
-        targets = targets.to(device)
+        if torch.cuda.is_available():
+            imgs = imgs.cuda()
+            targets = targets.cuda()
         outputs = chen(imgs)
         loss = loss_fn(outputs,targets)
 
@@ -95,12 +92,10 @@ for i in range(epoch):
         optim.step()
 
         total_train_step += 1
-        if total_train_step % 200 == 0:
+        if total_train_step % 500 == 0:
             print(f"第{total_train_step}的训练的loss:{loss.item()}")
             writer.add_scalar("train_loss",loss.item(),total_train_step)
 
-    end_time = time.time()
-    print(f"训练时间{end_time - start_time}")
     # 测试步骤（以测试数据上的正确率来评估模型）
     total_test_loss = 0.0
     # 整体正确个数
@@ -108,8 +103,9 @@ for i in range(epoch):
     with torch.no_grad():
         for data in test_loader:
             imgs, targets = data
-            imgs = imgs.to(device)
-            targets = targets.to(device)
+            if torch.cuda.is_available():
+                imgs = imgs.cuda()
+                targets = targets.cuda()
             outputs = chen(imgs)
             # 损失
             loss = loss_fn(outputs,targets)
